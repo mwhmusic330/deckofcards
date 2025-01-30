@@ -1,0 +1,48 @@
+import random
+class Card:
+    def __init__(self, number, suit):
+        self.number = number
+        self.suit = suit
+
+    def __str__(self):
+        return f"{self.number} of {self.suit}"
+
+    def __repr__(self):
+        return self.__str__()
+
+    def __lt__(self,other):
+        return self.number<other.number
+
+    def __gt__(self,other):
+        return self.number>other.number
+
+    def __eq__(self,other):
+        return self.number==other.number
+
+
+def spitoutdeck (): 
+    nums  = list(range(2,15))
+
+    suits = ["clubs", "spades", "hearts", "diamonds"]
+    cardlist = []
+    for x in suits:
+        for n in nums:
+            cardlist.append (Card (n,x))
+    random.shuffle (cardlist)
+    return cardlist
+
+def decider (player1, player2):
+    if player1 > player2:
+        return "winner"
+    if player1 <  player2:
+        return "loser"
+    if player1 == player2:
+        return "we both suck"
+
+
+deck = spitoutdeck()
+player1_draw = deck.pop(0)
+player2_draw = deck.pop(0)
+result = decider(player1_draw, player2_draw)  
+
+print (result)
